@@ -1,4 +1,4 @@
 package assertions;
 
-public class LoginPageAssertions {
+public class LoginPageAssertions{
 }
