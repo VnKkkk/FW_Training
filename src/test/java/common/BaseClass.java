@@ -3,6 +3,6 @@ package common;
 import org.openqa.selenium.WebDriver;
 
 public class BaseClass {
-    public WebDriver webDriver;
-    public String Url = "http://localhost:8080/login.php";
+    public static WebDriver webDriver;
+    public static String loginUrl = "http://localhost:8080/login.php";
 }

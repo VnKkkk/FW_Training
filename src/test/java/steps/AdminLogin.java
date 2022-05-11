@@ -1,31 +1,26 @@
-package stepdefs;
+package steps;
 
 import common.BaseClass;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
-public class LogInStepdefs extends BaseClass {
-
-    private BaseClass baseClass;
-
-    public LogInStepdefs(BaseClass baseClass) {
-        this.baseClass = baseClass;
-    }
-
-    public LogInStepdefs() {
+public class AdminLogin extends BaseClass {
+    public AdminLogin() {
     }
 
     @Given("The LogInPage is opened")
     public void theLogInPageIsOpened() {
-
-        baseClass.webDriver.get(baseClass.Url);
-
+        webDriver.get(loginUrl);
     }
 
     @When("The username {string} is filled in")
-    public void theUsernameIsFilledIn(String arg0) {
+    public void theUsernameIsFilledIn(String username) {
+//        WebElement usernameField = webDriver.findElement(By.id("username"));
+//        usernameField.sendKeys(username);
     }
 
     @And("the password {string} is filled in")
