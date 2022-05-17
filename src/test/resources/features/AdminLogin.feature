@@ -6,3 +6,4 @@ Feature: Log in with admin
     And the password "pass123" is filled in
     And the login button is clicked
     Then User is logged successfully
+

@@ -35,6 +35,10 @@ public class LoginPage {
         return webDriver.findElement(By.xpath("//a[@class=\"dropdown-toggle\"]"));
     }
 
+    public WebElement registerButton() {
+
+        return webDriver.findElement(By.xpath("//a[@href=\"register.php\"]"));
+    }
     public void fillInUsername(String username) {
 
         userNameField().clear();
@@ -76,5 +80,10 @@ public class LoginPage {
     public void assertionLogin(String text) {
 
         Assert.assertTrue(loginBar().getText().toLowerCase().contains(text));
+    }
+
+    public void clickRegisterButton() {
+
+        retryClick(registerButton());
     }
 }
