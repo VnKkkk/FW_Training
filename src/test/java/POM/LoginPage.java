@@ -32,7 +32,7 @@ public class LoginPage {
 
     public WebElement loginBar() {
 
-        return webDriver.findElement(By.xpath("//a[@class=\"dropdown-toggle\"]"));
+        return webDriver.findElement(By.className("dropdown-toggle"));
     }
 
     public WebElement registerButton() {

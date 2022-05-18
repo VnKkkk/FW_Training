@@ -3,13 +3,12 @@ package steps;
 import POM.LoginPage;
 import POM.RegisterPage;
 import POM.User;
+import com.github.javafaker.Faker;
 import common.BaseClass;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.WebDriver;
-
 import java.util.List;
 import java.util.Map;
 
@@ -18,11 +17,13 @@ public class UserRegistration extends BaseClass {
     public UserRegistration() {
         loginPage = new LoginPage(webDriver);
         registerPage = new RegisterPage(webDriver);
+        faker = new Faker();
     }
 
     private LoginPage loginPage;
     private RegisterPage registerPage;
     private String username;
+    private Faker faker;
 
     @And("The register button is clicked")
     public void theRegisterButtonIsClicked() {
@@ -33,6 +34,9 @@ public class UserRegistration extends BaseClass {
     @When("The following details are filled in with")
     public void theFollowingDetailsAreFilledInWithTitleFirstNameSirNameEmailPasswordCountryCity(DataTable table) throws InterruptedException {
         List<Map<String, String>> data = table.asMaps(String.class, String.class);
+
+            String email = faker.internet().emailAddress();
+
 
 //        for (Map<String, String> columns : data) {
 //
@@ -51,7 +55,7 @@ public class UserRegistration extends BaseClass {
         String title = data.get(0).get("title");
         String firstName = data.get(0).get("firstName");
         String sirName = data.get(0).get("sirName");
-        String email = data.get(0).get("email");
+//        String email = data.get(0).get("email");
         String password = data.get(0).get("password");
         String country = data.get(0).get("country");
         String city = data.get(0).get("city");
