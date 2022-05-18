@@ -22,6 +22,7 @@ public class UserRegistration extends BaseClass {
 
     private LoginPage loginPage;
     private RegisterPage registerPage;
+    private String username;
 
     @And("The register button is clicked")
     public void theRegisterButtonIsClicked() {
@@ -55,15 +56,9 @@ public class UserRegistration extends BaseClass {
         String country = data.get(0).get("country");
         String city = data.get(0).get("city");
 
-        registerPage.clickRadioButton(title);
-        registerPage.firstNameField().sendKeys(firstName);
-        registerPage.sirNameField().sendKeys(sirName);
-        registerPage.emailField().clear();
-        registerPage.emailField().sendKeys(email);
-        registerPage.passwordField().clear();
-        registerPage.passwordField().sendKeys(password);
-        registerPage.countryField().sendKeys(country);
-        registerPage.cityField().sendKeys(city);
+        this.username = email;
+        registerPage.fillInRegistrationDetails(title, firstName, sirName, email, password, country, city);
+
     }
 
     @And("I agree with the terms of service is clicked")
@@ -78,8 +73,10 @@ public class UserRegistration extends BaseClass {
         registerPage.registerButton().click();
     }
 
-//    @Then("The user is registered successfully")
-//    public void theUserIsRegisteredSuccessfully() {
-//    }
+    @Then("The user is registered successfully")
+    public void theUserIsRegisteredSuccessfully() {
+
+        loginPage.assertionLogin(username);
+    }
 
 }

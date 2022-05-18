@@ -80,4 +80,50 @@ public class RegisterPage {
         } else titleMrsRadioButton().click();
     }
 
+    public void fillInFirstName(String text) {
+
+        firstNameField().clear();
+        firstNameField().sendKeys(text);
+    }
+
+    public void fillInSirName(String text) {
+
+        sirNameField().clear();
+        sirNameField().sendKeys(text);
+    }
+
+    public void fillInEmail(String text) {
+
+        emailField().clear();
+        emailField().sendKeys(text);
+    }
+
+    public void fillInPassword(String text) {
+
+        passwordField().clear();
+        passwordField().sendKeys(text);
+    }
+
+    public void fillInCountry(String text) {
+
+        countryField().clear();
+        countryField().sendKeys(text);
+    }
+
+    public void fillInCity(String text) {
+
+        cityField().clear();
+        cityField().sendKeys(text);
+    }
+
+    public void fillInRegistrationDetails(String title, String firstName, String sirName, String email, String password, String country, String city) {
+
+        clickRadioButton(title);
+        fillInFirstName(firstName);
+        fillInSirName(sirName);
+        fillInEmail(email);
+        fillInPassword(password);
+        fillInCountry(country);
+        fillInCity(city);
+    }
 }
