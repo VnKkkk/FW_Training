@@ -2,6 +2,7 @@ package steps;
 
 import POM.LoginPage;
 import POM.RegisterPage;
+import com.github.javafaker.Faker;
 import common.BaseClass;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -10,19 +11,22 @@ public class MultipleUserRegistration extends BaseClass {
 
     RegisterPage registerPage;
     LoginPage loginPage;
+    Faker faker;
 
     public MultipleUserRegistration() {
 
         this.registerPage = new RegisterPage(webDriver);
         this.loginPage = new LoginPage(webDriver);
+        this.faker =new Faker();
     }
 
-    String email;
+    String username;
 
     @When("The following details are filled in with: {string}, {string}, {string}, {string}, {string}, {string}, {string}")
     public void theFollowingDetailsAreFilledInWithTitleFirstNameSirNameEmailPasswordCountryCity(String title, String firstName, String sirName, String email, String password, String country, String city) {
 
-        this.email = email;
+        email = faker.internet().emailAddress();
+        this.username = email;
         registerPage.fillInRegistrationDetails(title, firstName, sirName, email, password, country, city);
     }
 
@@ -30,6 +34,6 @@ public class MultipleUserRegistration extends BaseClass {
     @Then("The user is registered successfully.")
     public void theUserIsRegisteredSuccessfully() {
 
-        loginPage.assertionLogin(email);
+        loginPage.assertionLogin(username);
     }
 }

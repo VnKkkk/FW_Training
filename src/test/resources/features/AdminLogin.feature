@@ -7,3 +7,13 @@ Feature: Log in with admin
     And the login button is clicked
     Then User is logged successfully
 
+  Scenario Outline: Log in mandatory fields
+    Given  The LogInPage is opened
+    When The following details are filled in: '<userName>', '<password>'
+    And the login button is clicked
+    Then The error message is received
+
+    Examples:
+      | userName             | password |
+      |                      | pass123  |
+      | admin@automation.com |          |

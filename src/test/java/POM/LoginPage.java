@@ -2,11 +2,14 @@ package POM;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.Locale;
+import java.time.Duration;
+import java.util.NoSuchElementException;
 
 public class LoginPage {
     private WebDriver webDriver;
@@ -85,5 +88,29 @@ public class LoginPage {
     public void clickRegisterButton() {
 
         retryClick(registerButton());
+    }
+
+    public boolean waitUntilElementNotDisplayed(final WebElement webElement) {
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+        ExpectedCondition elementIsDisplayed = new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver arg0) {
+                try {
+                    webElement.isDisplayed();
+                    return false;
+                }
+                catch (NoSuchElementException e ) {
+                    return true;
+                }
+                catch (StaleElementReferenceException f) {
+                    return true;
+                }
+            }
+        };
+        wait.until(elementIsDisplayed);
+        return false;
+    }
+
+    public void assertNotPreset(){
+        Assert.assertFalse(waitUntilElementNotDisplayed(loginBar()));
     }
 }

@@ -18,6 +18,6 @@ Feature: User registration
     And The register button is clicked again
     Then The user is registered successfully.
     Examples:
-      | title | firstName | sirName | email           | password | country  | city    |
-      | Mrs.  | Tesy      | Testev  | te.t2@email.com | pass123  | Bulgaria | Plovdiv |
-      | Mrs.  | Tes       | Testev  | t.2@email.com   | pass123  | Bulgaria | Plovdiv |
+      | title | firstName | sirName | email  | password | country  | city    |
+      | Mrs.  | Tesy      | Testev  | random | pass123  | Bulgaria | Plovdiv |
+      | Mrs.  | Tes       | Testev  | random | pass123  | Bulgaria | Plovdiv |
