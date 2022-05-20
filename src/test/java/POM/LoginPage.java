@@ -42,6 +42,7 @@ public class LoginPage {
 
         return webDriver.findElement(By.xpath("//a[@href=\"register.php\"]"));
     }
+
     public void fillInUsername(String username) {
 
         userNameField().clear();
@@ -90,27 +91,10 @@ public class LoginPage {
         retryClick(registerButton());
     }
 
-    public boolean waitUntilElementNotDisplayed(final WebElement webElement) {
-        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
-        ExpectedCondition elementIsDisplayed = new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver arg0) {
-                try {
-                    webElement.isDisplayed();
-                    return false;
-                }
-                catch (NoSuchElementException e ) {
-                    return true;
-                }
-                catch (StaleElementReferenceException f) {
-                    return true;
-                }
-            }
-        };
-        wait.until(elementIsDisplayed);
-        return false;
-    }
+    public void assertLoginButtonIsPresent() throws InterruptedException {
 
-    public void assertNotPreset(){
-        Assert.assertFalse(waitUntilElementNotDisplayed(loginBar()));
+        Thread.sleep(3000);
+
+        Assert.assertTrue(logInButton().isDisplayed());
     }
 }

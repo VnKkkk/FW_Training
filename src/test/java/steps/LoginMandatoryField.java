@@ -30,6 +30,6 @@ public class LoginMandatoryField extends BaseClass {
 
 
 
-        loginPage.assertNotPreset();
+        loginPage.assertLoginButtonIsPresent();
     }
 }

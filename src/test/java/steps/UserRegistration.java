@@ -31,6 +31,7 @@ public class UserRegistration extends BaseClass {
         loginPage.clickRegisterButton();
     }
 
+    @When("The following details are filled in with the following details but the terms of service are not clicked")
     @When("The following details are filled in with")
     public void theFollowingDetailsAreFilledInWithTitleFirstNameSirNameEmailPasswordCountryCity(DataTable table) throws InterruptedException {
         List<Map<String, String>> data = table.asMaps(String.class, String.class);

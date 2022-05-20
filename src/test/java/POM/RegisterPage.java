@@ -1,5 +1,6 @@
 package POM;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -125,5 +126,21 @@ public class RegisterPage {
         fillInPassword(password);
         fillInCountry(country);
         fillInCity(city);
+    }
+
+    public void assertRegisterButtonIsPresent() throws InterruptedException {
+
+        Thread.sleep(3000);
+        Assert.assertTrue(registerButton().isDisplayed());
+    }
+
+    public void assertPopUpErrorMessage() throws InterruptedException {
+
+        Thread.sleep(1000);
+        String PopUpMessage = webDriver.switchTo().alert().getText();
+        webDriver.switchTo().alert().accept();
+        String ExpectedMessage = "You must agree with terms of service";
+
+        Assert.assertEquals(PopUpMessage, ExpectedMessage);
     }
 }
