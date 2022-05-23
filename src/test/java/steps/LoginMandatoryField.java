@@ -4,9 +4,6 @@ import POM.LoginPage;
 import common.BaseClass;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
-
-import java.util.NoSuchElementException;
 
 public class LoginMandatoryField extends BaseClass {
 

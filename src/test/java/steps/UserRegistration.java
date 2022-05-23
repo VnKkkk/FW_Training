@@ -2,7 +2,6 @@ package steps;
 
 import POM.LoginPage;
 import POM.RegisterPage;
-import POM.User;
 import com.github.javafaker.Faker;
 import common.BaseClass;
 import io.cucumber.datatable.DataTable;
@@ -39,24 +38,9 @@ public class UserRegistration extends BaseClass {
             String email = faker.internet().emailAddress();
 
 
-//        for (Map<String, String> columns : data) {
-//
-//            registerPage.addUser(new User(columns.get("title"), columns.get("firstName"), columns.get("sirName"), columns.get("email"), columns.get("password"), columns.get("country"), columns.get("city")));
-//           String title = columns.get("title");
-//            registerPage.clickRadioButton(title);
-//
-//         String firstName = columns.get("firstName");
-//           registerPage.firstNameField().clear();
-//            registerPage.firstNameField().sendKeys(firstName);
-//            Thread.sleep(2000);
-//
-//            String sirName =
-//        }
-
         String title = data.get(0).get("title");
         String firstName = data.get(0).get("firstName");
         String sirName = data.get(0).get("sirName");
-//        String email = data.get(0).get("email");
         String password = data.get(0).get("password");
         String country = data.get(0).get("country");
         String city = data.get(0).get("city");
@@ -72,7 +56,7 @@ public class UserRegistration extends BaseClass {
         registerPage.termsCheckbox().click();
     }
 
-    @And("The register button is clicked again")
+    @And("The register button is clicked on the register page")
     public void theRegisterButtonIsClickedAgain() {
 
         registerPage.registerButton().click();

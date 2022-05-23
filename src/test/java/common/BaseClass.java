@@ -1,7 +1,7 @@
 package common;
 
-import POM.LoginPage;
 import org.openqa.selenium.WebDriver;
+import POM.LoginPage;
 
 public class BaseClass {
     public static WebDriver webDriver;

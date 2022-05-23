@@ -4,7 +4,6 @@ import POM.RegisterPage;
 import common.BaseClass;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.WebDriver;
 
 public class RegistrationMandatoryField extends BaseClass {
 
@@ -21,6 +20,8 @@ public class RegistrationMandatoryField extends BaseClass {
     }
 
     @Then("The registration is not successful")
-    public void theRegistrationIsNotSuccessful() {
+    public void theRegistrationIsNotSuccessful() throws InterruptedException {
+
+        registerPage.assertRegisterButtonIsPresent();
     }
 }

@@ -7,7 +7,7 @@ Feature: User registration
       | title | firstName | sirName | email  | password | country  | city    |
       | Mrs.  | Testi     | Testev  | random | pass123  | Bulgaria | Plovdiv |
     And I agree with the terms of service is clicked
-    And The register button is clicked again
+    And The register button is clicked on the register page
     Then The user is registered successfully
 
   Scenario Outline: Multiple user registrations
@@ -15,7 +15,7 @@ Feature: User registration
     And The register button is clicked
     When The following details are filled in with: '<title>', '<firstName>', '<sirName>', '<email>', '<password>', '<country>', '<city>'
     And I agree with the terms of service is clicked
-    And The register button is clicked again
+    And The register button is clicked on the register page
     Then The user is registered successfully.
     Examples:
       | title | firstName | sirName | email  | password | country  | city    |
@@ -27,7 +27,7 @@ Feature: User registration
     And The register button is clicked
     When The following details are filled in with '<title>', '<firstName>', '<sirName>', '<email>', '<password>', '<country>', '<city>'
     And I agree with the terms of service is clicked
-    And The register button is clicked again
+    And The register button is clicked on the register page
     Then The registration is not successful
     Examples:
       | title | firstName | sirName | email               | password | country  | city  |
@@ -44,6 +44,6 @@ Feature: User registration
    When The following details are filled in with the following details but the terms of service are not clicked
      | title | firstName | sirName | email  | password | country  | city    |
      | Mrs.  | Testi     | Testev  | random | pass123  | Bulgaria | Plovdiv |
-   And The register button is clicked again
+   And The register button is clicked on the register page
    Then An error message is displayed
    And The registration is not successful

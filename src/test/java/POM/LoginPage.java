@@ -2,20 +2,16 @@ package POM;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
-import java.util.NoSuchElementException;
 
 public class LoginPage {
     private WebDriver webDriver;
+    private HomePage homePage;
 
     public LoginPage(WebDriver webDriver) {
         this.webDriver = webDriver;
+        homePage = new HomePage(webDriver);
     }
 
     public WebElement userNameField() {
@@ -31,11 +27,6 @@ public class LoginPage {
     public WebElement logInButton() {
 
         return webDriver.findElement(By.xpath("//button[@name=\"btn-login\"]"));
-    }
-
-    public WebElement loginBar() {
-
-        return webDriver.findElement(By.className("dropdown-toggle"));
     }
 
     public WebElement registerButton() {
@@ -83,7 +74,7 @@ public class LoginPage {
 
     public void assertionLogin(String text) {
 
-        Assert.assertTrue(loginBar().getText().toLowerCase().contains(text));
+//        Assert.assertTrue(homePage.loginBar.getText().toLowerCase().contains(text));
     }
 
     public void clickRegisterButton() {
