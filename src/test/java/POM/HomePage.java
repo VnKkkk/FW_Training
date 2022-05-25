@@ -1,31 +1,38 @@
 package POM;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 
 public class HomePage {
 
-    private WebDriver webDriver;
-
-    public HomePage(WebDriver webDriver) {
-
-        this.webDriver = webDriver;
+    public HomePage() {
     }
 
-    WebElement logoutButton = webDriver.findElement(By.xpath("//a[@href=\"logout.php?logout\"]"));
-//    WebElement loginBar = webDriver.findElement(By.className("dropdown-toggle"));
-    WebElement usersButton = webDriver.findElement(By.xpath("//*[text()=\"Users\"]"));
+    @FindBy(xpath = "//a[@href=\"logout.php?logout\"]")
+    WebElement logoutButton;
+
+    @FindBy(how = How.XPATH, using = "//a[@data-toggle=\"dropdown\"]")
+    WebElement loginBar;
+
+    @FindBy(xpath = "//*[text()=\"Users\"]")
+    WebElement usersButton;
 
     public void logoutFromAccount() {
 
-//        loginBar.click();
+        loginBar.click();
         logoutButton.click();
 
-        }
+    }
 
-        public void ClickUsersButton() {
+    public void ClickUsersButton() {
 
         usersButton.click();
-        }
     }
+
+    public void assertionLogin(String text) {
+
+     Assert.assertTrue(loginBar.getText().toLowerCase().contains(text));
+    }
+}

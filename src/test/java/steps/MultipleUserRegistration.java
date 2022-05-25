@@ -1,5 +1,6 @@
 package steps;
 
+import POM.HomePage;
 import POM.LoginPage;
 import POM.RegisterPage;
 import com.github.javafaker.Faker;
@@ -12,12 +13,14 @@ public class MultipleUserRegistration extends BaseClass {
     RegisterPage registerPage;
     LoginPage loginPage;
     Faker faker;
+    HomePage homePage;
 
     public MultipleUserRegistration() {
 
         this.registerPage = new RegisterPage(webDriver);
         this.loginPage = new LoginPage(webDriver);
         this.faker =new Faker();
+        this.homePage = new HomePage();
     }
 
     String username;
@@ -34,6 +37,6 @@ public class MultipleUserRegistration extends BaseClass {
     @Then("The user is registered successfully.")
     public void theUserIsRegisteredSuccessfully() {
 
-        loginPage.assertionLogin(username);
+        homePage.assertionLogin(username);
     }
 }

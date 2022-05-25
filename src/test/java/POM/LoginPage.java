@@ -7,11 +7,11 @@ import org.openqa.selenium.WebElement;
 
 public class LoginPage {
     private WebDriver webDriver;
-    private HomePage homePage;
+
 
     public LoginPage(WebDriver webDriver) {
         this.webDriver = webDriver;
-        homePage = new HomePage(webDriver);
+
     }
 
     public WebElement userNameField() {
@@ -72,10 +72,6 @@ public class LoginPage {
         retryClick(logInButton());
     }
 
-    public void assertionLogin(String text) {
-
-//        Assert.assertTrue(homePage.loginBar.getText().toLowerCase().contains(text));
-    }
 
     public void clickRegisterButton() {
 

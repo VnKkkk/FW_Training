@@ -1,5 +1,6 @@
 package steps;
 
+import POM.HomePage;
 import POM.LoginPage;
 import POM.RegisterPage;
 import com.github.javafaker.Faker;
@@ -13,16 +14,20 @@ import java.util.Map;
 
 
 public class UserRegistration extends BaseClass {
-    public UserRegistration() {
-        loginPage = new LoginPage(webDriver);
-        registerPage = new RegisterPage(webDriver);
-        faker = new Faker();
-    }
 
     private LoginPage loginPage;
     private RegisterPage registerPage;
     private String username;
     private Faker faker;
+    HomePage homePage;
+
+    public UserRegistration() {
+        loginPage = new LoginPage(webDriver);
+        registerPage = new RegisterPage(webDriver);
+        faker = new Faker();
+        homePage = new HomePage();
+
+    }
 
     @And("The register button is clicked")
     public void theRegisterButtonIsClicked() {
@@ -65,7 +70,7 @@ public class UserRegistration extends BaseClass {
     @Then("The user is registered successfully")
     public void theUserIsRegisteredSuccessfully() {
 
-        loginPage.assertionLogin(username);
+        homePage.assertionLogin(username);
     }
 
 }
