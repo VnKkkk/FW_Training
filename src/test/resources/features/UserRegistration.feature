@@ -47,3 +47,13 @@ Feature: User registration
    And The register button is clicked on the register page
    Then An error message is displayed
    And The registration is not successful
+
+   Scenario: User registration with lombok
+     Given  The LogInPage is opened
+     And The register button is clicked
+     When The following details are filled in using lombok
+       | title | firstName | sirName | email  | password | country  | city    |
+       | Mrs.  | Testi     | Testev  | random | pass123  | Bulgaria | Plovdiv |
+     And I agree with the terms of service is clicked
+     And The register button is clicked on the register page
+     Then The user is registered successfully with lombok
