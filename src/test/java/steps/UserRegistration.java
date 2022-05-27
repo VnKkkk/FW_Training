@@ -25,7 +25,7 @@ public class UserRegistration extends BaseClass {
         loginPage = new LoginPage(webDriver);
         registerPage = new RegisterPage(webDriver);
         faker = new Faker();
-        homePage = new HomePage();
+        homePage = new HomePage(webDriver);
 
     }
 

@@ -20,7 +20,7 @@ public class MultipleUserRegistration extends BaseClass {
         this.registerPage = new RegisterPage(webDriver);
         this.loginPage = new LoginPage(webDriver);
         this.faker =new Faker();
-        this.homePage = new HomePage();
+        this.homePage = new HomePage(webDriver);
     }
 
     String username;

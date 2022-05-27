@@ -18,10 +18,10 @@ public class UIHooks extends BaseClass {
         webDriver.manage().window().maximize();
     }
 
-//    @After
-//    public void tearDown() {
-//        if (webDriver != null) {
-//            webDriver.close();
-//        }
-//    }
+    @After
+    public void tearDown() {
+        if (webDriver != null) {
+            webDriver.close();
+        }
+    }
 }

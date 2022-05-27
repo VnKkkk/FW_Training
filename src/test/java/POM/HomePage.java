@@ -1,13 +1,17 @@
 package POM;
 
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
+    WebDriver webDriver;
 
-    public HomePage() {
+    public HomePage(WebDriver webDriver) {
+        PageFactory.initElements(webDriver,this);
     }
 
     @FindBy(xpath = "//a[@href=\"logout.php?logout\"]")
@@ -33,6 +37,6 @@ public class HomePage {
 
     public void assertionLogin(String text) {
 
-     Assert.assertTrue(loginBar.getText().toLowerCase().contains(text));
+        Assert.assertTrue(loginBar.getText().toLowerCase().contains(text));
     }
 }

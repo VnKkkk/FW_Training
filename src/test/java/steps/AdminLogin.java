@@ -20,7 +20,7 @@ public class AdminLogin extends BaseClass {
     private ConfigReader configReader;
 
     public AdminLogin() {
-        homePage = new HomePage();
+        homePage = new HomePage(webDriver);
         loginPage = new LoginPage(webDriver);
         configReader = new ConfigReader();
 

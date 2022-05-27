@@ -25,9 +25,9 @@ public class DeleteUser extends BaseClass {
     public DeleteUser() {
 
         this.registerPage = new RegisterPage(webDriver);
-        this.homePage = new HomePage();
+        this.homePage = new HomePage(webDriver);
         this.loginPage = new LoginPage(webDriver);
-        this.usersPage = new UsersPage();
+        this.usersPage = new UsersPage(webDriver);
     }
 
     @And("A user is registered with the following details")
@@ -79,5 +79,7 @@ public class DeleteUser extends BaseClass {
 
     @Then("The user should be deleted")
     public void theUserShouldBeDeleted() {
+
+        usersPage.assertUserIsDeleted(userName);
     }
 }

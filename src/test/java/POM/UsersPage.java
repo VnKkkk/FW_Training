@@ -1,35 +1,54 @@
 package POM;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
 public class UsersPage {
+    WebDriver webDriver;
 
+    public UsersPage(WebDriver webDriver) {
+        this.webDriver = webDriver;
+    }
 
-    public UsersPage() {
+    public List<WebElement> emailFields() {
+
+        return webDriver.findElements(By.xpath("//tr/td[6]"));
 
     }
 
-    //List<WebElement> emailFields = webDriver.findElements(By.xpath("//tr/td[6]"));
-   // List<WebElement> deleteFields = webDriver.findElements(By.xpath("//tr/td[7]"));
+    public List<WebElement> deleteFields() {
 
-    @FindBy(xpath = "//tr/td[6]")
-    List<WebElement> emailFields;
+        return webDriver.findElements(By.xpath("//tr/td[7]"));
 
-    @FindBy(xpath = "//tr/td[7]")
-    List<WebElement> deleteFields;
+    }
 
     public void deleteUser(String userName) {
 
-        for (int i = 0; i <= emailFields.size() - 1; i++) {
-            if (emailFields.get(i).getText().contains(userName)) {
-                deleteFields.get(i).click();
+        for (int i = 0; i <= emailFields().size() - 1; i++) {
+            if (emailFields().get(i).getText().contains(userName)) {
+                deleteFields().get(i).click();
                 break;
             }
         }
+
+        webDriver.switchTo().alert().accept();
+    }
+
+    public void assertUserIsDeleted(String userName) {
+        boolean present = false;
+        for (int i = 0; i <= emailFields().size() - 1; i++) {
+            if (emailFields().get(i).getText().contains(userName)) {
+                present = true;
+                break;
+            }
+        }
+        Assert.assertFalse(present);
     }
 }
+
