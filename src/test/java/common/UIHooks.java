@@ -12,10 +12,10 @@ public class UIHooks extends BaseClass {
     @Before
     public void setUp() {
 
-        WebDriverManager.chromedriver().setup();
-
-        webDriver = new ChromeDriver();
-        webDriver.manage().window().maximize();
+//        WebDriverManager.chromedriver().setup();
+//
+//        webDriver = new ChromeDriver();
+//        webDriver.manage().window().maximize();
     }
 
     @After
