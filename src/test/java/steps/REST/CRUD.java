@@ -22,9 +22,11 @@ public class CRUD {
     @When("I perform a {string} request to {string}")
     public void iPerformARequestTo(String resource, String path) {
 
-        if (resource.equalsIgnoreCase("GET")) {
-            restActions.getResource(path);
-        }
+//        if (resource.equalsIgnoreCase("GET")) {
+//            restActions.getResource(path);
+//        } else if (resource.equalsIgnoreCase("POST")) {
+            restActions.postResource(path);
+//        }
     }
 
     @Then("I should receive all users")
@@ -36,5 +38,16 @@ public class CRUD {
     @And("Status code {string} with a message {string}")
     public void statusCodeWithAMessage(String statusCode, String statusMessage) {
         restActions.returnStatusCode(statusCode, statusMessage);
+    }
+
+    @Then("I should receive a user with the specific id")
+    public void iShouldReceiveAUserWithTheSpecificId() {
+
+        restActions.returnBody();
+    }
+
+    @And("I filled in the following username and password:{string}, {string}")
+    public void iFilledInTheFollowingUsernameAndPassword(String username, String password) {
+
     }
 }
