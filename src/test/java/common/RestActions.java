@@ -3,7 +3,6 @@ package common;
 import com.github.javafaker.Faker;
 import dataProviders.ConfigReader;
 import io.cucumber.datatable.DataTable;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
@@ -11,60 +10,28 @@ import org.junit.Assert;
 import java.util.List;
 import java.util.Map;
 
-import static io.restassured.RestAssured.given;
-
 public class RestActions {
 
-    private ConfigReader configReader;
     private Response response;
     private Faker faker;
-    private static String requestBody = "{\n" +
-            "  \"title\": \"Mr.\",\n" +
-            "  \"first_name\": \"Misho\",\n" +
-            "  \"sir_name\": \"Mishev\",\n" +
-            "  \"email\": \"mmsss12@email.com\",\n" +
-            "  \"password\": \"pass123\",\n" +
-            "  \"country\": \"Misho\",\n" +
-            "  \"city\": \"Misho\",\n" +
-            "  \"is_admin\": \"0\" \n}";
+    private BaseRestClient baseRestClient;
+
     public RestActions() {
         faker = new Faker();
-        configReader = new ConfigReader();
+        baseRestClient = new BaseRestClient(response);
     }
 
     public void getResource(String path) {
 
-        Response getResponse = RestAssured.get(configReader.getAPIUrl() + path);
-        this.response = getResponse;
+        Response response = baseRestClient.getResponse(path);
+        this.response = response;
 
-    }
-
-    public void postResource(String path) {
-
-        Response response = given()
-                .header("Content-type", "application/json")
-                .and()
-                .body(requestBody)
-                .when()
-                .post(configReader.getAPIUrl() + path)
-                .then()
-                .extract().response();
-
-        System.out.println(response.getStatusLine());
     }
 
     public void postResourceWithJson(String path, JSONObject object) {
 
 
-        Response response = given()
-                .header("Content-type", "application/json")
-                .and()
-                .body(object.toJSONString())
-                .when()
-                .post(configReader.getAPIUrl() + path)
-                .then()
-                .extract().response();
-
+        Response response = baseRestClient.postResponse(path, object);
         this.response = response;
     }
 
@@ -82,7 +49,7 @@ public class RestActions {
         Assert.assertEquals(statusMessage, array[2]);
     }
 
-    public JSONObject fillInRegistrationDetails(DataTable table){
+    public JSONObject fillInRegistrationDetails(DataTable table) {
 
         JSONObject requestParams = new JSONObject();
         List<Map<String, String>> data = table.asMaps(String.class, String.class);
