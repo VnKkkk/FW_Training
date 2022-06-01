@@ -10,10 +10,11 @@ Feature: CRUD operations with REST
     Then I should receive a user with the specific id
     And Status code "200" with a message "OK"
 
-  Scenario: Login admin with REST
-    When I perform a "POST" request to "/login"
-#    And I filled in the following username and password:"admin@automation.com", "pass123"
-#    Then Status code "200" with a message "OK"
 
   Scenario: POST new user with REST
-    When I perform a "POST" request to "/users"
+
+    When I use the following details:
+      | title | first_name | sir_name | email  | password | country  | city    | is_admin |
+      | Mr.   | Ivan       | Ivanov   | random | pass123  | Bulgaria | Plovdiv | 0        |
+    And I perform a "POST" request to "/users"
+    Then Status code "200" with a message "OK"
