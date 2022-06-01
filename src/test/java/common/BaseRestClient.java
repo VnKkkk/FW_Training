@@ -32,4 +32,17 @@ public class BaseRestClient {
                 .extract().response();
 
     }
+
+    public Response postWithLombok(String path, String object){
+        return given()
+                .header("Content-type", "application/json")
+                .and()
+                .body(object)
+                .when()
+                .post(configReader.getAPIUrl() + path)
+                .then()
+                .extract().response();
+
+    }
+
 }

@@ -15,6 +15,7 @@ public class CRUD {
     private RestActions restActions;
     private Faker faker;
     private JSONObject requestParams;
+    private String body;
 
     public CRUD() {
         restActions = new RestActions();
@@ -59,5 +60,17 @@ public class CRUD {
             this.requestParams = restActions.fillInRegistrationDetails(table);
 
 
+    }
+
+    @When("I use the following details with lombok")
+    public void iUseTheFollowingDetailsWithLombok(DataTable dataTable) {
+        this.body = restActions.fillInRegistrationWithLombok(dataTable);
+
+    }
+
+    @And("I perform a {string} request to {string} with lombok")
+    public void iPerformARequestToWithLombok(String resource, String path) {
+
+        restActions.postResourceWithLombok(path,body);
     }
 }

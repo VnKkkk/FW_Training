@@ -1,7 +1,10 @@
 package common;
 
+import POM.User;
+import POM.UserModel;
 import com.github.javafaker.Faker;
-import dataProviders.ConfigReader;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import io.cucumber.datatable.DataTable;
 import io.restassured.response.Response;
 import org.json.simple.JSONObject;
@@ -15,10 +18,12 @@ public class RestActions {
     private Response response;
     private Faker faker;
     private BaseRestClient baseRestClient;
+    private UserModel userModel;
 
     public RestActions() {
         faker = new Faker();
         baseRestClient = new BaseRestClient(response);
+        userModel = new UserModel();
     }
 
     public void getResource(String path) {
@@ -32,6 +37,13 @@ public class RestActions {
 
 
         Response response = baseRestClient.postResponse(path, object);
+        this.response = response;
+    }
+
+    public void postResourceWithLombok(String path, String object) {
+
+
+        Response response = baseRestClient.postWithLombok(path, object);
         this.response = response;
     }
 
@@ -65,5 +77,29 @@ public class RestActions {
         requestParams.put("city", data.get(0).get("city"));
         requestParams.put("is_admin", data.get(0).get("is_admin"));
         return requestParams;
+    }
+
+    public String fillInRegistrationWithLombok(DataTable table) {
+        List<Map<String, String>> data = table.asMaps(String.class, String.class);
+
+        String email = faker.internet().emailAddress();
+
+        User user = User.builder()
+                .title(data.get(0).get("title"))
+                .first_name(data.get(0).get("first_name"))
+                .sir_name(data.get(0).get("sir_name"))
+                .email(email)
+                .password(data.get(0).get("password"))
+                .country(data.get(0).get("country"))
+                .city(data.get(0).get("city"))
+                .is_admin(data.get(0).get("is_admin"))
+                .build();
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String body = gson.toJson(user);
+        System.out.println(body);
+
+        return body;
+
     }
 }

@@ -12,4 +12,5 @@ public class UserModel {
     private String password;
     private String country;
     private String city;
+    private String is_admin;
 }
