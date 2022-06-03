@@ -1,14 +1,15 @@
 package common;
 
 import POM.User;
-import POM.UserModel;
 import com.github.javafaker.Faker;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.cucumber.datatable.DataTable;
 import io.restassured.response.Response;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.junit.Assert;
+import org.modelmapper.ModelMapper;
 
 import java.util.List;
 import java.util.Map;
@@ -16,14 +17,16 @@ import java.util.Map;
 public class RestActions {
 
     private Response response;
+    public static String id;
     private Faker faker;
     private BaseRestClient baseRestClient;
-    private UserModel userModel;
+
 
     public RestActions() {
         faker = new Faker();
         baseRestClient = new BaseRestClient(response);
-        userModel = new UserModel();
+
+
     }
 
     public void getResource(String path) {
@@ -40,11 +43,32 @@ public class RestActions {
         this.response = response;
     }
 
-    public void postResourceWithLombok(String path, String object) {
+    public void postResourceWithLombok(String path, String text) {
 
 
-        Response response = baseRestClient.postWithLombok(path, object);
+        Response response = baseRestClient.postWithLombok(path, text);
         this.response = response;
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        String string = response.andReturn().getBody().asString();
+        Object object = JSONValue.parse(string);
+        JSONObject jsonObject = (JSONObject)object;
+
+
+        String ID = ((JSONObject)object).get("id").toString();
+        this.id = ID;
+
+        String body = gson.toJson(string);
+        System.out.println(body);
+    }
+
+        public void putResource(String path, String body){
+        Response response = baseRestClient.putResponse(id, path, body);
+            System.out.println(body);
+        }
+
+    public void deleteUser(){
+        baseRestClient.deleteResponse(id);
     }
 
     public void returnBody() {
@@ -60,6 +84,7 @@ public class RestActions {
         Assert.assertEquals(statusCode, array[1]);
         Assert.assertEquals(statusMessage, array[2]);
     }
+
 
     public JSONObject fillInRegistrationDetails(DataTable table) {
 
@@ -82,24 +107,12 @@ public class RestActions {
     public String fillInRegistrationWithLombok(DataTable table) {
         List<Map<String, String>> data = table.asMaps(String.class, String.class);
 
-        String email = faker.internet().emailAddress();
-
-        User user = User.builder()
-                .title(data.get(0).get("title"))
-                .first_name(data.get(0).get("first_name"))
-                .sir_name(data.get(0).get("sir_name"))
-                .email(email)
-                .password(data.get(0).get("password"))
-                .country(data.get(0).get("country"))
-                .city(data.get(0).get("city"))
-                .is_admin(data.get(0).get("is_admin"))
-                .build();
+        ModelMapper modelMapper = new ModelMapper();
+        User user = modelMapper.map(data.get(0), User.class);
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String body = gson.toJson(user);
-        System.out.println(body);
 
-        return body;
+        return gson.toJson(user);
 
     }
 }

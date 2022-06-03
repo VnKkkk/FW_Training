@@ -1,3 +1,4 @@
+@web
 Feature: User registration
 
   Scenario: User registration

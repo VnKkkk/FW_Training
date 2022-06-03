@@ -2,6 +2,7 @@ package steps;
 
 import POM.HomePage;
 import POM.RegisterPage;
+import POM.User;
 import POM.UserModel;
 import com.github.javafaker.Faker;
 import common.BaseClass;

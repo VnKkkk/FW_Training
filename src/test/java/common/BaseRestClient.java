@@ -5,6 +5,8 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.json.simple.JSONObject;
 
+import java.security.PublicKey;
+
 import static io.restassured.RestAssured.given;
 
 public class BaseRestClient {
@@ -43,6 +45,24 @@ public class BaseRestClient {
                 .then()
                 .extract().response();
 
+    }
+
+    public Response deleteResponse(String id){
+        return given()
+                .header("Content-type", "application/json")
+                .delete(configReader.getAPIUrl() + "/users/" + id);
+    }
+
+    public Response putResponse(String id, String path, String body){
+        return  given()
+                .header("Content-type", "application/json")
+                .and()
+                .body(body)
+                .when()
+                .put(configReader.getAPIUrl() + path + id)
+                .then()
+                .extract()
+                .response();
     }
 
 }

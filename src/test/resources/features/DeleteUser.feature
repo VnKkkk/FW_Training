@@ -1,3 +1,4 @@
+@web
 Feature: Deletion of the user
 
   Scenario: Delete user

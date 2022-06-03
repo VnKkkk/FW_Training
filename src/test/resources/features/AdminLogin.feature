@@ -1,3 +1,4 @@
+@web
 Feature: Log in with admin
 
   Scenario: Log in with admin account
