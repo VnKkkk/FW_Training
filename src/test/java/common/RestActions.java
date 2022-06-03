@@ -26,7 +26,6 @@ public class RestActions {
         faker = new Faker();
         baseRestClient = new BaseRestClient(response);
 
-
     }
 
     public void getResource(String path) {
@@ -36,12 +35,6 @@ public class RestActions {
 
     }
 
-    public void postResourceWithJson(String path, JSONObject object) {
-
-
-        Response response = baseRestClient.postResponse(path, object);
-        this.response = response;
-    }
 
     public void postResourceWithLombok(String path, String text) {
 
@@ -52,8 +45,6 @@ public class RestActions {
 
         String string = response.andReturn().getBody().asString();
         Object object = JSONValue.parse(string);
-        JSONObject jsonObject = (JSONObject)object;
-
 
         String ID = ((JSONObject)object).get("id").toString();
         this.id = ID;
@@ -64,7 +55,8 @@ public class RestActions {
 
         public void putResource(String path, String body){
         Response response = baseRestClient.putResponse(id, path, body);
-            System.out.println(body);
+        this.response = response;
+        System.out.println(response.andReturn().getBody().asString());
         }
 
     public void deleteUser(){
@@ -86,23 +78,6 @@ public class RestActions {
     }
 
 
-    public JSONObject fillInRegistrationDetails(DataTable table) {
-
-        JSONObject requestParams = new JSONObject();
-        List<Map<String, String>> data = table.asMaps(String.class, String.class);
-
-        String email = faker.internet().emailAddress();
-
-        requestParams.put("title", data.get(0).get("title"));
-        requestParams.put("first_name", data.get(0).get("first_name"));
-        requestParams.put("sir_name", data.get(0).get("sir_name"));
-        requestParams.put("email", email);
-        requestParams.put("password", data.get(0).get("password"));
-        requestParams.put("country", data.get(0).get("country"));
-        requestParams.put("city", data.get(0).get("city"));
-        requestParams.put("is_admin", data.get(0).get("is_admin"));
-        return requestParams;
-    }
 
     public String fillInRegistrationWithLombok(DataTable table) {
         List<Map<String, String>> data = table.asMaps(String.class, String.class);

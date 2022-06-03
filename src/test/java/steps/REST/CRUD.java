@@ -6,19 +6,16 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.json.simple.JSONObject;
 
 public class CRUD {
 
 
     private RestActions restActions;
-    private JSONObject requestParams;
     private String body;
     private String newBody;
 
     public CRUD() {
         restActions = new RestActions();
-        requestParams = new JSONObject();
     }
 
     @And("I perform a {string} request to {string} with lombok")
