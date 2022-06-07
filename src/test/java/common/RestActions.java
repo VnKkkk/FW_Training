@@ -20,11 +20,13 @@ public class RestActions {
     public static String id;
     private Faker faker;
     private BaseRestClient baseRestClient;
+    private DefaultUser defaultUser;
 
 
     public RestActions() {
         faker = new Faker();
         baseRestClient = new BaseRestClient(response);
+        defaultUser = new DefaultUser();
 
     }
 
@@ -46,20 +48,40 @@ public class RestActions {
         String string = response.andReturn().getBody().asString();
         Object object = JSONValue.parse(string);
 
-        String ID = ((JSONObject)object).get("id").toString();
-        this.id = ID;
+//        String ID = ((JSONObject) object).get("id").toString();
+//        this.id = ID;
 
         String body = gson.toJson(string);
         System.out.println(body);
     }
 
-        public void putResource(String path, String body){
+    public void putResource(String path, String body) {
+
         Response response = baseRestClient.putResponse(id, path, body);
         this.response = response;
         System.out.println(response.andReturn().getBody().asString());
-        }
 
-    public void deleteUser(){
+
+    }
+
+    public void creatingNewUser(){
+        String body = defaultUser.addingUserDetails();
+
+        Response response = baseRestClient.postWithLombok("/users", body);
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        String string = response.andReturn().getBody().asString();
+        Object object = JSONValue.parse(string);
+
+        String ID = ((JSONObject) object).get("id").toString();
+        this.id = ID;
+
+        String newBody = gson.toJson(string);
+        System.out.println(newBody);
+    }
+
+    public void deleteUser() {
         baseRestClient.deleteResponse(id);
     }
 
@@ -76,7 +98,6 @@ public class RestActions {
         Assert.assertEquals(statusCode, array[1]);
         Assert.assertEquals(statusMessage, array[2]);
     }
-
 
 
     public String fillInRegistrationWithLombok(DataTable table) {

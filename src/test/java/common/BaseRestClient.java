@@ -17,7 +17,13 @@ public class BaseRestClient {
 
     public Response getResponse(String path){
 
-        return RestAssured.get(configReader.getAPIUrl() + path);
+        return given()
+                .header("Content-type", "application/json")
+                .get(configReader.getAPIUrl() + path)
+                .then()
+                .statusCode(200)
+                .extract()
+                .response();
     }
 
     public Response postWithLombok(String path, String object){
@@ -28,14 +34,20 @@ public class BaseRestClient {
                 .when()
                 .post(configReader.getAPIUrl() + path)
                 .then()
-                .extract().response();
+                .statusCode(200)
+                .extract()
+                .response();
 
     }
 
     public Response deleteResponse(String id){
         return given()
                 .header("Content-type", "application/json")
-                .delete(configReader.getAPIUrl() + "/users/" + id);
+                .delete(configReader.getAPIUrl() + "/users/" + id)
+                .then()
+                .statusCode(200)
+                .extract()
+                .response();
     }
 
     public Response putResponse(String id, String path, String body){
@@ -46,6 +58,7 @@ public class BaseRestClient {
                 .when()
                 .put(configReader.getAPIUrl() + path + id)
                 .then()
+                .statusCode(200)
                 .extract()
                 .response();
     }

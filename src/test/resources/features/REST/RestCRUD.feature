@@ -5,6 +5,7 @@ Feature: CRUD operations with REST
     Then I should receive all users
     And Status code "200" with a message "OK"
 
+
   Scenario: GET specific user with REST
     When I perform a "GET" request to "/users/3"
     Then I should receive a user with the specific id
@@ -21,21 +22,15 @@ Feature: CRUD operations with REST
 
 
   Scenario: Delete user with REST
-    Given I use the following details
-      | title | first_name | sir_name | email            | password | country  | city    | is_admin |
-      | Mr.   | Ivan       | Ivanov   | vanko1@email.com | pass123  | Bulgaria | Plovdiv | 0        |
-    And I perform a "POST" request to "/users".
+    Given A user is registered
     When I perform a "DELETE" request to "/users/"
     Then I should receive status code "200" with a message "OK"
 
-    
+
   @rest
   Scenario: PUT user details with REST
-    Given I use the following details
-      | title | first_name | sir_name | email            | password | country  | city    | is_admin |
-      | Mr.   | Ivan       | Ivanov   | vanko1@email.com | pass123  | Bulgaria | Plovdiv | 0        |
-    And I perform a "POST" request to "/users".
-    When I use the following details:
+    Given A user is registered
+    When I use the following details to update the user:
       | title | first_name | sir_name | country | city  | email           |
       | Mr.   | Pesho      | Peshev   | BG      | Sofia | pesho@email.com |
     And I perform a "PUT" request to "/users/"

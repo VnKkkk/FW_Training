@@ -48,18 +48,23 @@ public class CRUD {
         restActions.returnStatusCode(statusCode, statusMessage);
     }
 
-    @And("I use the following details:")
+    @And("I use the following details to update the user:")
     public void iUseTheFollowingDetails(DataTable table) {
 
         this.newBody = restActions.fillInRegistrationWithLombok(table);
 
 
     }
-    @Given("I use the following details")
+    
     @When("I use the following details with lombok")
     public void iUseTheFollowingDetailsWithLombok(DataTable dataTable) {
         this.body = restActions.fillInRegistrationWithLombok(dataTable);
 
     }
 
+    @Given("A user is registered")
+    public void aUserIsRegistered() {
+
+    restActions.creatingNewUser();
+    }
 }
