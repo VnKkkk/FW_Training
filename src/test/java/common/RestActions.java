@@ -46,12 +46,11 @@ public class RestActions {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         String string = response.andReturn().getBody().asString();
+        String body = gson.toJson(string);
         Object object = JSONValue.parse(string);
 
-//        String ID = ((JSONObject) object).get("id").toString();
-//        this.id = ID;
-
-        String body = gson.toJson(string);
+        String ID = ((JSONObject) object).get("id").toString();
+        this.id = ID;
         System.out.println(body);
     }
 
@@ -61,11 +60,10 @@ public class RestActions {
         this.response = response;
         System.out.println(response.andReturn().getBody().asString());
 
-
     }
 
     public void creatingNewUser(){
-        String body = defaultUser.addingUserDetails();
+        String body = defaultUser.addingUserDetailsWithRest();
 
         Response response = baseRestClient.postWithLombok("/users", body);
 
@@ -82,7 +80,7 @@ public class RestActions {
     }
 
     public void deleteUser() {
-        baseRestClient.deleteResponse(id);
+        this.response = baseRestClient.deleteResponse(id);
     }
 
     public void returnBody() {

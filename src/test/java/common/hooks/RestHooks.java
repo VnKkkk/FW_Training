@@ -1,5 +1,6 @@
-package common;
+package common.hooks;
 
+import common.RestActions;
 import io.cucumber.java.After;
 
 public class RestHooks {

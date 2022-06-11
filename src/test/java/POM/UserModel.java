@@ -13,4 +13,5 @@ public class UserModel {
     private String country;
     private String city;
     private String is_admin;
+    private String id;
 }

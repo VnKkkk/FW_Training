@@ -82,4 +82,6 @@ public class DeleteUser extends BaseClass {
 
         usersPage.assertUserIsDeleted(userName);
     }
+
+
 }

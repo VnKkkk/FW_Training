@@ -55,7 +55,7 @@ public class CRUD {
 
 
     }
-    
+
     @When("I use the following details with lombok")
     public void iUseTheFollowingDetailsWithLombok(DataTable dataTable) {
         this.body = restActions.fillInRegistrationWithLombok(dataTable);

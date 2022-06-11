@@ -15,8 +15,8 @@ Feature: CRUD operations with REST
   @rest
   Scenario: POST new user with REST and lombok
     When I use the following details with lombok
-      | title | first_name | sir_name | email            | password | country  | city    | is_admin |
-      | Mr.   | Ivan       | Ivanov   | vanko1@email.com | pass123  | Bulgaria | Plovdiv | 0        |
+      | title | first_name | sir_name | email               | password | country  | city    | is_admin |
+      | Mr.   | Ivan       | Ivanov   | banko1899@email.com | pass123  | Bulgaria | Plovdiv | 0        |
     And I perform a "POST" request to "/users" with lombok
     Then Status code "200" with a message "OK"
 

@@ -1,5 +1,6 @@
-package common;
+package common.hooks;
 
+import common.BaseClass;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;

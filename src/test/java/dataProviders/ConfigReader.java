@@ -39,5 +39,22 @@ public class ConfigReader {
         if (url != null) return url;
         else throw new RuntimeException("url not specified in the Configuration.properties file.");
     }
+
+    public String getDBUrl() {
+        String url = properties.getProperty("database.local.url");
+        if (url != null) return url;
+        else throw new RuntimeException("url not specified in the Configuration.properties file.");
+    }
+
+    public String getDBUsername(){
+       String username =  properties.getProperty("database.local.username");
+       return username;
+    }
+
+    public String getDBPassword(){
+        String password =  properties.getProperty("database.local.password");
+        return password;
+    }
+
 }
 
